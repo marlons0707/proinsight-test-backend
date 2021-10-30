@@ -18,7 +18,6 @@ class CreateProductsTable extends Migration
             $table->string('name')->unique();
 
             $table->foreignId('category_id')->constrained();
-            $table->foreignId('location_id')->constrained();
             $table->foreignId('unit_id')->constrained();
 
             $table->string('description')->nullable();

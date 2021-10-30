@@ -42,7 +42,6 @@ class ProductController extends BaseController
         $validator = Validator::make($input, [
             'name' => 'required|unique:products,name',
             'category_id' => 'required',
-            'location_id' => 'required',
             'unit_id' => 'required',
             'stock' => 'required',
             'price' => 'required',
@@ -82,7 +81,6 @@ class ProductController extends BaseController
         $validator = Validator::make($input, [
             'name' => 'required|unique:products,name,'.$product->id,
             'category_id' => 'required',
-            'location_id' => 'required',
             'unit_id' => 'required',
             'price' => 'required',
             'cost' => 'required',

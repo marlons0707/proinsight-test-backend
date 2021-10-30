@@ -2,7 +2,6 @@
 
 namespace App\Models\Catalogs;
 
-use App\Models\Settings\Location;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +12,6 @@ class Product extends Model
     protected $fillable = [
         'name',
         'category_id',
-        'location_id',
         'unit_id',
         'description',
         'stock',
@@ -41,11 +39,6 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
-    }
-
-    public function location()
-    {
-        return $this->belongsTo(Location::class);
     }
 
     public function unit()

@@ -4,7 +4,6 @@ namespace App\Http\Resources\Catalogs;
 
 use App\Models\Catalogs\Category;
 use App\Models\Catalogs\Unit;
-use App\Models\Settings\Location;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
@@ -22,11 +21,9 @@ class ProductResource extends JsonResource
             'name' => $this->name,
 
             'category_id' => $this->category_id,
-            'location_id' => $this->location_id,
             'unit_id' => $this->unit_id,
 
             'category' => Category::find($this->category_id)->name,
-            'location' => Location::find($this->location_id)->name,
             'unit' => Unit::find($this->unit_id)->name,
 
             'description' => $this->description,
