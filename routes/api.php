@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\Access\UserController;
 use App\Http\Controllers\API\Catalogs\CategoryController;
+use App\Http\Controllers\API\Catalogs\ContainerController;
 use App\Http\Controllers\API\Catalogs\PriceController;
 use App\Http\Controllers\API\Catalogs\ProductController;
 use App\Http\Controllers\API\Catalogs\UnitController;
@@ -41,6 +42,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('category', CategoryController::class);
     Route::apiResource('unit', UnitController::class);
     Route::apiResource('price', PriceController::class);
+    Route::apiResource('container', ContainerController::class);
 
     // Purchase
     Route::apiResource('purchase', PurchaseController::class);
