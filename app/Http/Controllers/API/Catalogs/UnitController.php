@@ -48,7 +48,7 @@ class UnitController extends BaseController
         }
         
         $unit = Unit::create($input);
-        return $this->handleResponse(new UnitResource($unit), 'Unidad de medida creada exitosamente.');
+        return $this->handleResponse(new UnitResource($unit), 'Presentación creada exitosamente.');
     }
 
     /**
@@ -82,7 +82,7 @@ class UnitController extends BaseController
         }
         
         $unit->update($request->all());
-        return $this->handleResponse(new UnitResource($unit), 'Unidad de medida actualizada exitosamente.', 202);
+        return $this->handleResponse(new UnitResource($unit), 'Presentación actualizada exitosamente.', 202);
     }
 
     /**
@@ -95,7 +95,7 @@ class UnitController extends BaseController
     {
         try {
             $unit->delete();
-            return $this->handleResponse(new UnitResource($unit), 'Unidad de medida eliminada exitosamente.', 200);
+            return $this->handleResponse(new UnitResource($unit), 'Presentación eliminada exitosamente.', 200);
         } catch (QueryException $e) {
             return $this->handleError($e->errorInfo);
         }

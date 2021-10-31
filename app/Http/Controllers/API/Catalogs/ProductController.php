@@ -43,9 +43,9 @@ class ProductController extends BaseController
             'name' => 'required|unique:products,name',
             'category_id' => 'required',
             'unit_id' => 'required',
-            'stock' => 'required',
-            'price' => 'required',
-            'cost' => 'required',
+            // 'stock' => 'required',
+            // 'price' => 'required',
+            // 'cost' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -82,9 +82,9 @@ class ProductController extends BaseController
             'name' => 'required|unique:products,name,'.$product->id,
             'category_id' => 'required',
             'unit_id' => 'required',
-            'price' => 'required',
-            'cost' => 'required',
-            'status' => 'ignore'
+            // 'price' => 'required',
+            // 'cost' => 'required',
+            // 'status' => 'ignore'
         ]);
 
         if ($validator->fails()) {

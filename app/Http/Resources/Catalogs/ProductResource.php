@@ -20,6 +20,10 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
 
+            'sku' => $this->sku,
+            'volume' => $this->volume,
+            'units_per_box' => $this->units_per_box,
+
             'category_id' => $this->category_id,
             'unit_id' => $this->unit_id,
 
@@ -27,9 +31,6 @@ class ProductResource extends JsonResource
             'unit' => Unit::find($this->unit_id)->name,
 
             'description' => $this->description,
-            'stock' => $this->stock,
-            'price' => $this->price,
-            'cost' => $this->cost,
             'image' => $this->image,
             'status' => $this->status,
             'created_at' => $this->created_at->format('d/m/Y h:i:s'),

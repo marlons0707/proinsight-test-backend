@@ -16,14 +16,12 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-
+            $table->string('sku')->nullable();
+            $table->string('volume')->nullable();
+            $table->string('units_per_box')->nullable();
             $table->foreignId('category_id')->constrained();
             $table->foreignId('unit_id')->constrained();
-
             $table->string('description')->nullable();
-            $table->integer('stock');
-            $table->decimal('price', 10, 2);
-            $table->decimal('cost', 10, 2);
             $table->string('image')->nullable();
             $table->enum('status', ['Y', 'N'])->default('Y');
             $table->timestamps();
