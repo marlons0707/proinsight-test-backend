@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\Access\UserController;
 use App\Http\Controllers\API\Catalogs\CategoryController;
 use App\Http\Controllers\API\Catalogs\ProductController;
 use App\Http\Controllers\API\Catalogs\UnitController;
@@ -20,13 +21,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Public routes
-Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 // Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     // System
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('register', [AuthController::class, 'register']);
+    Route::apiResource('user', UserController::class);
 
     // Contacts
     // ===========================================================================
@@ -38,9 +40,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('category', CategoryController::class);
     Route::apiResource('unit', UnitController::class);
 
-
     // Purchase
     Route::apiResource('purchase', PurchaseController::class);
     Route::put('purchase/cancel/{id}', [PurchaseController::class, 'cancelPurchase']);
-    
 });

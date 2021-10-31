@@ -45,6 +45,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function scopeFilter($query, $field, $value)
+    {
+        if ($value) {
+            $query->where($field, '=', $value);
+        }
+    }
+
+    public function scopeSearch($query, $term)
+    {
+        $term = "%$term%";
+        $query->where(function($query) use ($term) {
+            $query->where('name', 'LIKE', $term);
+        });
+    }
+
     /**
      * 
      * 
@@ -54,4 +69,5 @@ class User extends Authenticatable
     {
         return $this->hasMany(Purchase::class);
     }
+    
 }

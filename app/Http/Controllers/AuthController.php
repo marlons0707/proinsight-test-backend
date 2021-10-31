@@ -2,38 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
-class AuthController extends Controller
+class AuthController extends BaseController
 {
     public function register(Request $request) {
-        $fields = $request->validate([
+        $input = $request->all();
+        $validator = Validator::make($input, [
             'name' => 'required|string',
             'email' => 'required|string|unique:users,email',
             'user' => 'required|string|unique:users,user',
             'password' => 'required|string|confirmed'
         ]);
 
-        $user = User::create([
-            'name' => $fields['name'],
-            'email' => $fields['email'],
-            'user' => $fields['user'],
-            'password' => bcrypt($fields['password'])
-        ]);
+        if ($validator->fails()) {
+            return $this->handleError($validator->errors());       
+        }
 
-        $token = $user->createToken('FerreSurWebToken')->plainTextToken;
-
-        $response = [
-            'user' => $user,
-            'token' => $token,
-            'res' => true,
-            'msg' => 'Usuario creado con éxito'
-        ];
-
-        return response($response, 201);
+        try {
+            $user = User::create([
+                'name' => $input['name'],
+                'email' => $input['email'],
+                'user' => $input['user'],
+                'password' => bcrypt($input['password'])
+            ]);
+    
+            $response = [
+                'user' => $user,
+                'res' => true,
+                'msg' => 'Usuario creado con éxito'
+            ];
+    
+            return response($response, 201);            
+        } catch (\Throwable $th) {
+            return $this->handleResponse($th->getMessage());
+        }
     }
 
     public function login(Request $request) {
@@ -65,7 +72,7 @@ class AuthController extends Controller
         return response($response, 201);
     }
 
-    public function logout(Request $request) {
+    public function logout() {
         auth()->user()->tokens()->delete();
 
         return [
