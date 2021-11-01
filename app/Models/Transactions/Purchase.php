@@ -53,7 +53,7 @@ class Purchase extends Model
         ->join('containers', 'purchases.container_id', 'containers.id')
         ->select(
             'purchases.id',
-            // 'purchases.status',
+            'purchases.status',
             'suppliers.name as supplier',
             'purchases.document',
             DB::raw('SUM(purchase_details.real_cost * purchase_details.quantity) as total'),
@@ -66,8 +66,8 @@ class Purchase extends Model
             DB::raw('DATE_FORMAT(purchases.purchase_date, "%d/%m/%Y") as purchase_date'),
             DB::raw('DATE_FORMAT(purchases.created_at, "%d/%m/%Y %h:%i:%s") as created_at'),
         )
-        // ->where('purchases.status', 'LIKE', $searchParam)
-        ->where('purchases.document', 'LIKE', $searchParam)
+        ->where('purchases.status', 'LIKE', $searchParam)
+        ->orWhere('purchases.document', 'LIKE', $searchParam)
         ->orWhere('purchases.created_at', 'LIKE', $searchParam)
         ->orWhere('suppliers.name', 'LIKE', $searchParam)
         ->orWhere('users.name', 'LIKE', $searchParam)
