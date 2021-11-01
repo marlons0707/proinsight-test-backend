@@ -71,7 +71,7 @@ class Purchase extends Model
         ->orWhere('purchases.created_at', 'LIKE', $searchParam)
         ->orWhere('suppliers.name', 'LIKE', $searchParam)
         ->orWhere('users.name', 'LIKE', $searchParam)
-        ->groupBy('id')
+        ->groupBy('purchases.id')
         ->orderBy($sortField, $sortDirection)
         ->paginate($perPage);
 
