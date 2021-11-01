@@ -66,8 +66,8 @@ class Purchase extends Model
             DB::raw('DATE_FORMAT(purchases.purchase_date, "%d/%m/%Y") as purchase_date'),
             DB::raw('DATE_FORMAT(purchases.created_at, "%d/%m/%Y %h:%i:%s") as created_at'),
         )
-        ->where('purchases.status', 'LIKE', $searchParam)
-        ->orWhere('purchases.document', 'LIKE', $searchParam)
+        // ->where('purchases.status', 'LIKE', $searchParam)
+        ->where('purchases.document', 'LIKE', $searchParam)
         ->orWhere('purchases.created_at', 'LIKE', $searchParam)
         ->orWhere('suppliers.name', 'LIKE', $searchParam)
         ->orWhere('users.name', 'LIKE', $searchParam)
