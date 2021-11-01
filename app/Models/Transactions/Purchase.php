@@ -53,7 +53,7 @@ class Purchase extends Model
         ->join('containers', 'purchases.container_id', 'containers.id')
         ->select(
             'purchases.id',
-            'purchases.status',
+            // 'purchases.status',
             'suppliers.name as supplier',
             'purchases.document',
             DB::raw('SUM(purchase_details.real_cost * purchase_details.quantity) as total'),
