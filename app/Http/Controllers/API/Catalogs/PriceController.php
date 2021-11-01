@@ -58,6 +58,17 @@ class PriceController extends BaseController
         }
     }
 
+    // Obtener los productos de un proveedor
+    public function getProductsBySupplier($supplier_id)
+    {
+        $perPage = request('perPage', 10);
+        $searchParam = request('query', '');
+        $sortField = request('sortField', 'id');
+        $sortDirection = request('sortDesc', 'asc');
+
+        return Price::getProductsBySupplier($supplier_id, $searchParam, $sortField, $sortDirection, $perPage);
+    }
+
     /**
      * Display the specified resource.
      *

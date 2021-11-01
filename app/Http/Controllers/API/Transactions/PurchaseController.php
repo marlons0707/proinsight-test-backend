@@ -54,7 +54,12 @@ class PurchaseController extends BaseController
                     'document' => $input['document'],
                     'contact' => $input['contact'],
                     'purchase_date' => $input['purchase_date'],
-                    'comments' => $input['comments'],
+                    'date_attempt' => $input['date_attempt'],
+                    // 'date_arrival' => $input['date_arrival'],
+                    'place_arrival' => $input['place_arrival'],
+                    'container_id' => $input['container_id'],
+                    
+                    // 'comments' => $input['comments'],
                 ]
             );
 

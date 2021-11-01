@@ -15,8 +15,11 @@ class Purchase extends Model
     protected $fillable = [
         'supplier_id',
         'user_id',
+        'container_id',
         'purchase_date',
         'document_type',
+        'date_attempt',
+        'place_arrival',
         'document',
         'status',
         'comments',
@@ -47,6 +50,7 @@ class Purchase extends Model
         ->join('purchase_details', 'purchases.id', 'purchase_details.purchase_id')
         ->join('suppliers', 'purchases.supplier_id', 'suppliers.id')
         ->join('users', 'purchases.user_id', 'users.id')
+        ->join('containers', 'purchases.container_id', 'containers.id')
         ->select(
             'purchases.id',
             'purchases.status',
@@ -55,6 +59,10 @@ class Purchase extends Model
             DB::raw('SUM(purchase_details.real_cost * purchase_details.quantity) as total'),
             'purchases.comments',
             'users.name as user',
+            'containers.name as container',
+            'containers.type as container_type',
+            
+            DB::raw('DATE_FORMAT(purchases.date_attempt, "%d/%m/%Y") as date_attempt'),
             DB::raw('DATE_FORMAT(purchases.purchase_date, "%d/%m/%Y") as purchase_date'),
             DB::raw('DATE_FORMAT(purchases.created_at, "%d/%m/%Y %h:%i:%s") as created_at'),
         )
